@@ -11,10 +11,10 @@ const covidData = axios.get(url)
 
 
 app.get('/api/countries', async (req, res) => {
-  const aaa = await covidData.then(response => { return response.data })
+  const result = await covidData.then(response => { return response.data })
     .catch(err => console.error("Err: ", err))
   let arr = []
-  aaa.forEach(element => {
+  result.forEach(element => {
     if (!arr.includes(element.country)) {
       arr.push(element.country)
     }
@@ -61,9 +61,6 @@ app.get('/api/cases/:name', async (req, res) => {
   res.status(200).json(arrCases)
 });
 
-// app.get('*', (req,res) => {
-//   res.sendFile(path.join(__dirname + '/build/index.html'));
-// })
 
 app.listen(8000, () => console.log('Listening on port 8000'));
 
